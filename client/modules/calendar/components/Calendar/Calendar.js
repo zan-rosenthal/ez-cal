@@ -4,10 +4,15 @@ import "dayz/dist/dayz.css";
 // Setup the localizer by providing the moment (or globalize) Object
 // to the correct localizer
 
-export default function(props) {
+export default function Calendar({ date, events, onDayClick, theme }) {
   return (
-    <div className={props.theme.container}>
-      <Dayz display="week" date={props.date} events={props.events} />
+    <div className={theme.container}>
+      <Dayz
+        display="month"
+        date={date}
+        events={events}
+        onDayClick={onDayClick}
+      />
     </div>
   );
 }

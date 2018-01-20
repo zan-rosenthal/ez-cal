@@ -1,39 +1,29 @@
-import { applySpec, always, compose, identity } from "ramda";
+import { applySpec, always, compose, concat, identity, prop } from "ramda";
 import { withHandlers, withProps } from "recompose";
-import Moment from "moment";
-import { extendMoment } from "moment-range";
-import Dayz from "dayz";
-
+import { connect } from "react-redux";
 import withTheme from "utils/HOC/withTheme";
 
+import { setSelectedDay } from "../../actions";
+import Calendar from "../../selectors";
+import { moment, today } from "../../utils/moment";
 import theme from "./theme.scss";
 
-export const moment = extendMoment(Moment);
-
-const date = moment();
-
-const events = props =>
-  new Dayz.EventsCollection([
-    {
-      content: "A short event",
-      range: moment.range(date.clone(), date.clone().add(1, "day"))
-    },
-    {
-      content: "Two Hours ~ 8-10",
-      range: moment.range(date.clone().hour(8), date.clone().hour(10))
-    },
-    {
-      content: "A Longer Event",
-      range: moment.range(
-        date.clone().subtract(2, "days"),
-        date.clone().add(8, "days")
-      )
-    }
-  ]);
-
-const spec = applySpec({
-  date: always(date),
-  events
+const mapStateToProps = applySpec({
+  selectedDay: Calendar.selectedDay,
+  pendingAppointment: Calendar.pendingAppointment
 });
 
-export default compose(withProps(spec), withTheme(theme));
+const spec = applySpec({
+  date: always(today)
+  // events
+});
+
+const onDayClick = ({ setSelectedDay }) => (_, date) =>
+  setSelectedDay(date.toISOString());
+
+export default compose(
+  connect(mapStateToProps, { setSelectedDay }),
+  withProps(spec),
+  withHandlers({ onDayClick }),
+  withTheme(theme)
+);

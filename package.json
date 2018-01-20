@@ -30,6 +30,7 @@
     "recompose": "^0.26.0",
     "redux": "^3.6.0",
     "redux-devtools-extension": "^2.13.2",
+    "redux-little-router": "^14.2.3",
     "roboto-fontface": "^0.7.0",
     "sass-lint": "^1.10.2",
     "zeal-redux-utils": "^1.0.0"

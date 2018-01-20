@@ -1,10 +1,8 @@
+import { combineReducers } from "redux";
 import createReducer from "utils/createReducer";
 
-const initialState = {};
+import { calendarReducer } from "modules/calendar";
 
-const handlers = {
-  // Pattern:
-  // [ActionTypes.ACTION_NAME]: actionFunction
-};
-
-export default createReducer(initialState, handlers);
+export default combineReducers({
+  calendar: calendarReducer
+});

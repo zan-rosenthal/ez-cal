@@ -1,7 +1,23 @@
 @import '~styles/globals';
 
 .container {
-  margin: 2.5% auto;
-  height: 90%;
-  width: 90%;
+  margin: 5% auto;
+  height: 80%;
+  width: 80%;
+}
+
+
+:global {
+  .dayz  {
+    font-size: 18px;
+
+    .x-labels {
+      height: auto;
+    }
+
+    .y-labels {
+      text-indent: 0;
+      width: 98%;
+    }
+  }
 }
