@@ -12,7 +12,7 @@ import { apolloClient, configureStore } from "./base";
 import App from "./modules/app/components/App";
 
 import "./styles/commons.scss";
-import theme from "./styles/theme";
+// import theme from "./styles/theme";
 
 const rootEl = document.getElementById("root");
 const store = configureStore();
@@ -22,7 +22,7 @@ ReactDOM.render(<Root currentApp={App} />, rootEl);
 function Root({ currentApp }) {
   return (
     <ApolloProvider client={apolloClient} store={store}>
-      <ThemeProvider theme={theme}>
+      <ThemeProvider>
         <BrowserRouter>
           {React.createElement(currentApp)}
         </BrowserRouter>
