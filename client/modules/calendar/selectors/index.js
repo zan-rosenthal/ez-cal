@@ -5,8 +5,10 @@ const localState = path(["app", "calendar"]);
 
 const selectedDay = path(["selectedDay"]);
 const pendingAppointment = path(["pendingAppointment"]);
+const scheduledAppointments = path(["scheduledAppointments"])
 
 export default globalizeSelectors(localState, {
   selectedDay,
-  pendingAppointment
+  pendingAppointment,
+  scheduledAppointments
 });

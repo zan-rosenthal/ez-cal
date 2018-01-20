@@ -1,5 +1,4 @@
 import React from "react";
-import { Switch, Route } from "react-router-dom";
 import { themr } from "react-css-themr";
 import { Calendar } from "modules/calendar";
 

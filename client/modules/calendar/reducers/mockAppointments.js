@@ -1,7 +1,7 @@
 import { moment, today, nextMonth } from "../utils/moment";
 import Dayz from "dayz";
 
-export default new Dayz.EventsCollection([
+export default [
   {
     content: "A short event",
     range: moment.range(today.clone(), today.clone().add(1, "day"))
@@ -17,4 +17,4 @@ export default new Dayz.EventsCollection([
       today.clone().add(8, "days")
     )
   }
-]);
+]

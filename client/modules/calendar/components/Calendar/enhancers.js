@@ -10,12 +10,12 @@ import theme from "./theme.scss";
 
 const mapStateToProps = applySpec({
   selectedDay: Calendar.selectedDay,
-  pendingAppointment: Calendar.pendingAppointment
+  pendingAppointment: Calendar.pendingAppointment,
+  scheduledAppointments: Calendar.scheduledAppointments
 });
 
 const spec = applySpec({
   date: always(today)
-  // events
 });
 
 const onDayClick = ({ setSelectedDay }) => (_, date) =>
