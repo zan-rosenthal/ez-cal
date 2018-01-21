@@ -6,8 +6,9 @@ export default function AppointmentCreationDialog({
   active,
   handleConfirm,
   handleCancel,
-  handleSetDescription,
-  handleSetName
+  handleSetContent,
+  handleSetName,
+  pendingAppointment: { name, content }
 }) {
   const actions = [
     { label: "Cancel", onClick: handleCancel },
@@ -16,9 +17,20 @@ export default function AppointmentCreationDialog({
 
   return (
     <Dialog actions={actions} active={active}>
-      <Input onChange={handleSetDescription} type="text" label="Name" />
-      <Input onChange={handleSetName} type="textarea" label="Description" />
-      <p>Please enter a description for your appointment</p>
+      <Input
+        onChange={handleSetName}
+        type="text"
+        label="Name"
+        value={name || ""}
+      />
+      {!name && <p>Please enter a name for your appointment</p>}
+      <Input
+        onChange={handleSetContent}
+        type="textarea"
+        label="Description"
+        value={content || ""}
+      />
+      {!content && <p>Please enter a description for your appointment</p>}
     </Dialog>
   );
 }
