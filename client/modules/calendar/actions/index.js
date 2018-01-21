@@ -1,7 +1,7 @@
 export {
   clearPendingAppointment,
   setAppointmentDate,
-  setAppointmentDescription,
+  setAppointmentContent,
   setAppointmentName
 } from "./pendingAppointment";
 export { saveAppointment } from "./scheduledAppointments";

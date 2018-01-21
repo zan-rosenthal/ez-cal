@@ -9,9 +9,9 @@ export const setAppointmentDate = selectedDay => ({
   payload: { selectedDay }
 });
 
-export const setAppointmentDescription = description => ({
+export const setAppointmentContent = content => ({
   type: UPDATE_PENDING_APPOINTMENT,
-  payload: { description }
+  payload: { content }
 });
 
 export const setAppointmentName = name => ({

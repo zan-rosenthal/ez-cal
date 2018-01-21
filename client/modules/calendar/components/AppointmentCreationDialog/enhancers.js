@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { withHandlers } from "recompose";
 
 import {
-  setAppointmentDescription,
+  setAppointmentContent,
   setAppointmentName,
   clearPendingAppointment,
   saveAppointment
@@ -20,12 +20,12 @@ const handleConfirm = props => () => {
 };
 
 const handleCancel = prop("clearPendingAppointment");
-const handleSetDescription = prop("setAppointmentDescription");
+const handleSetContent = prop("setAppointmentContent");
 const handleSetName = prop("setAppointmentName");
 
 export default compose(
   connect(mapStateToProps, {
-    setAppointmentDescription,
+    setAppointmentContent,
     setAppointmentName,
     clearPendingAppointment,
     saveAppointment
@@ -33,7 +33,7 @@ export default compose(
   withHandlers({
     handleConfirm,
     handleCancel,
-    handleSetDescription,
+    handleSetContent,
     handleSetName
   })
 );
