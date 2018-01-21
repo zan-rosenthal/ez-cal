@@ -1,4 +1,4 @@
-import { append } from 'ramda'
+import { append } from "ramda";
 import { SAVE_APPOINTMENT } from "../constants/actionTypes";
 import createReducer from "utils/createReducer";
 import mockAppointments from "./mockAppointments";
@@ -13,7 +13,4 @@ const handlers = {
   [SAVE_APPOINTMENT]: saveAppointment
 };
 
-export default createReducer(
-  {...mockAppointments},
-  handlers
-);
+export default createReducer([...mockAppointments], handlers);

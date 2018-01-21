@@ -1,12 +1,12 @@
-import { merge } from "ramda";
-
 import { SET_SELECTED_DAY } from "../constants/actionTypes";
 import createReducer from "utils/createReducer";
 
-import dateStringToCalednarEvent from "../utils/dateStringToCalendarEvent";
+import convertToDateRange from "../utils/convertToDateRange";
 
 function setSelectedDay(state, { payload: { selectedDay } }) {
-  return merge(state, { selectedDay: dateStringToCalednarEvent(selectedDay) });
+  return {
+    range: convertToDateRange(selectedDay)
+  };
 }
 
 const handlers = {

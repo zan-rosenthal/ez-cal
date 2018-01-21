@@ -1,5 +1,4 @@
-import { moment, today, nextMonth } from "../utils/moment";
-import Dayz from "dayz";
+import { moment, today } from "../utils/moment";
 
 export default [
   {
@@ -17,4 +16,4 @@ export default [
       today.clone().add(8, "days")
     )
   }
-]
+];
