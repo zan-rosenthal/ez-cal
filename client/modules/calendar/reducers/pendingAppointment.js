@@ -3,11 +3,9 @@ import createReducer from "utils/createReducer";
 
 import convertToDateRange from "../utils/convertToDateRange";
 
-function setSelectedDay(state, { payload: { selectedDay } }) {
-  return {
-    range: convertToDateRange(selectedDay)
-  };
-}
+const setSelectedDay = (state, { payload: { selectedDay } }) => ({
+  range: convertToDateRange(selectedDay)
+});
 
 const handlers = {
   [SET_SELECTED_DAY]: setSelectedDay

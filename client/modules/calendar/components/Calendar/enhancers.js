@@ -6,7 +6,7 @@ import withTheme from "utils/HOC/withTheme";
 import { setSelectedDay } from "../../actions";
 import Calendar from "../../selectors";
 import { today } from "../../utils/moment";
-import { combineAppointments } from "./utils";
+import { combineAppointments, toDayzEventCollection } from "./utils";
 import theme from "./theme.scss";
 
 const mapStateToProps = applySpec({
@@ -16,11 +16,11 @@ const mapStateToProps = applySpec({
 
 const spec = applySpec({
   date: always(today),
-  appointments: combineAppointments
+  appointments: compose(toDayzEventCollection, combineAppointments)
 });
 
-const onDayClick = (props) => (_, date) =>
-  props.setPendingAppointment(date.toISOString());
+const onDayClick = props => (_, date) =>
+  props.setSelectedDay(date.toISOString());
 
 export default compose(
   connect(mapStateToProps, { setSelectedDay }),
