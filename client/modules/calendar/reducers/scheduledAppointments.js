@@ -3,10 +3,8 @@ import { SAVE_APPOINTMENT } from "../constants/actionTypes";
 import createReducer from "utils/createReducer";
 import mockAppointments from "../utils/mockAppointments";
 
-function saveAppointment(state, { payload: { appointment } }) {
-  const nextAppointments = append(appointment, state.scheduledAppointments);
-
-  return { ...state, appointments: nextAppointments };
+export function saveAppointment(state, { payload: { appointment } }) {
+  return append(appointment, state);
 }
 
 const handlers = {

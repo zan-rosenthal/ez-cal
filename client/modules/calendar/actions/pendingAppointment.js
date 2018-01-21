@@ -1,6 +1,25 @@
-import { SET_SELECTED_DAY } from "../constants/actionTypes";
+import {
+  SET_APPOINTMENT_DATE,
+  CLEAR_PENDING_APPOINTMENT,
+  UPDATE_PENDING_APPOINTMENT
+} from "../constants/actionTypes";
 
-export const setSelectedDay = selectedDay => ({
-  type: SET_SELECTED_DAY,
+export const setAppointmentDate = selectedDay => ({
+  type: SET_APPOINTMENT_DATE,
   payload: { selectedDay }
+});
+
+export const setAppointmentDescription = description => ({
+  type: UPDATE_PENDING_APPOINTMENT,
+  payload: { description }
+});
+
+export const setAppointmentName = name => ({
+  type: UPDATE_PENDING_APPOINTMENT,
+  payload: { name }
+});
+
+export const clearPendingAppointment = () => ({
+  type: CLEAR_PENDING_APPOINTMENT,
+  payload: {}
 });

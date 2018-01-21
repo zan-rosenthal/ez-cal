@@ -3,10 +3,13 @@ import { withHandlers, withProps } from "recompose";
 import { connect } from "react-redux";
 import withTheme from "utils/HOC/withTheme";
 
-import { setSelectedDay } from "../../actions";
+import { setAppointmentDate } from "../../actions";
 import Calendar from "../../selectors";
 import { today } from "../../utils/moment";
-import { combineAppointments, toDayzEventCollection } from "./utils";
+import {
+  formatAppointmentsForCalendar,
+  shouldRenderAppointmentCreationDialog
+} from "./utils";
 import theme from "./theme.scss";
 
 const mapStateToProps = applySpec({
@@ -16,15 +19,16 @@ const mapStateToProps = applySpec({
 
 const spec = applySpec({
   date: always(today),
-  appointments: compose(toDayzEventCollection, combineAppointments)
+  appointments: formatAppointmentsForCalendar,
+  shouldRenderAppointmentCreationDialog
 });
 
-const onDayClick = props => (_, date) =>
-  props.setSelectedDay(date.toISOString());
+const handleSelectDay = props => (_, date) =>
+  props.setAppointmentDate(date.toISOString());
 
 export default compose(
-  connect(mapStateToProps, { setSelectedDay }),
+  connect(mapStateToProps, { setAppointmentDate }),
   withProps(spec),
-  withHandlers({ onDayClick }),
+  withHandlers({ handleSelectDay }),
   withTheme(theme)
 );

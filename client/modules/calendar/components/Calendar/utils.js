@@ -1,6 +1,7 @@
 import {
   append,
   compose,
+  complement,
   converge,
   either,
   isNil,
@@ -16,4 +17,14 @@ export const toDayzEventCollection = events =>
 export const combineAppointments = compose(
   reject(either(isNil, isEmpty)),
   converge(append, [prop("pendingAppointment"), prop("scheduledAppointments")])
+);
+
+export const formatAppointmentsForCalendar = compose(
+  toDayzEventCollection,
+  combineAppointments
+);
+
+export const shouldRenderAppointmentCreationDialog = compose(
+  complement(isEmpty),
+  prop("pendingAppointment")
 );

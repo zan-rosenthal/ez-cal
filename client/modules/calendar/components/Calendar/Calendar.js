@@ -2,14 +2,27 @@ import React from "react";
 import Dayz from "dayz";
 import "dayz/dist/dayz.css";
 
-export default function Calendar({ date, appointments, onDayClick, theme }) {
+import Dialog from "modules/generic/components/Dialog";
+
+import AppointmentCreationDialog from "../AppointmentCreationDialog";
+
+export default function Calendar({
+  date,
+  appointments,
+  handleSelectDay,
+  theme,
+  shouldRenderAppointmentCreationDialog
+}) {
   return (
-    <div className={theme.container}>
+    <div key="Calendar" className={theme.container}>
       <Dayz
         display="month"
         date={date}
         events={appointments}
-        onDayClick={onDayClick}
+        onDayClick={handleSelectDay}
+      />
+      <AppointmentCreationDialog
+        active={shouldRenderAppointmentCreationDialog}
       />
     </div>
   );
