@@ -1,15 +1,20 @@
-import { combineAppointments, canAddAppointment } from "../utils";
+import {
+  combineAppointments,
+  canAddAppointment,
+  shouldRenderAppointmentCreationDialog
+} from "../utils";
 import { convertToDateRange, mockAppointments } from "../../../utils";
 import { moment, today } from "../../../utils/moment";
 
 describe("Calendar/utils", () => {
   describe("combineAppointments", () => {
     const scheduledAppointments = mockAppointments;
-    const pendingAppointment = {
-      range: convertToDateRange(today.toISOString())
-    };
-
     test("it converts scheduledAppointments and pendingAppointments to a Dayz events collection", () => {
+      const pendingAppointment = {
+        content: "Meeting with foo",
+        range: convertToDateRange(today.toISOString())
+      };
+
       const props = {
         pendingAppointment,
         scheduledAppointments
@@ -19,6 +24,19 @@ describe("Calendar/utils", () => {
         ...scheduledAppointments,
         pendingAppointment
       ]);
+    });
+
+    test("it ignores the pendingAppointment if there is no range", () => {
+      const pendingAppointment = {
+        content: "Meeting with foo"
+      };
+
+      const props = {
+        pendingAppointment,
+        scheduledAppointments
+      };
+
+      expect(combineAppointments(props)).toEqual(scheduledAppointments);
     });
   });
 
@@ -46,6 +64,18 @@ describe("Calendar/utils", () => {
       expect(
         canAddAppointment(today.clone().add(5, "day"))(scheduledAppointments)
       ).toBe(true);
+    });
+  });
+
+  describe("shouldRenderAppointmentCreationDialog", () => {
+    test("it returns true if the pendingAppointment has a date range", () => {
+      const pendingAppointment = {
+        range: convertToDateRange(today.toISOString())
+      };
+
+      const props = { pendingAppointment };
+
+      expect(shouldRenderAppointmentCreationDialog(props)).toBe(true);
     });
   });
 });

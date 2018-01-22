@@ -3,7 +3,7 @@ import { withHandlers, withProps } from "recompose";
 import { connect } from "react-redux";
 import withTheme from "utils/HOC/withTheme";
 
-import { setAppointmentDate } from "../../actions";
+import { setAppointmentDate, setAppointmentError } from "../../actions";
 import Calendar from "../../selectors";
 import { today } from "../../utils/moment";
 import {
@@ -27,10 +27,12 @@ const spec = applySpec({
 const handleSelectDate = props => (_, date) =>
   canAddAppointment(date)(props.scheduledAppointments)
     ? props.setAppointmentDate(date.toISOString())
-    : console.log("Cant make that appointment", date);
+    : props.setAppointmentError(
+        "There is already an appointment on that day, please select another"
+      );
 
 export default compose(
-  connect(mapStateToProps, { setAppointmentDate }),
+  connect(mapStateToProps, { setAppointmentDate, setAppointmentError }),
   withProps(spec),
   withHandlers({ handleSelectDate }),
   withTheme(theme)

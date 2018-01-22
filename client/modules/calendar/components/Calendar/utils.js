@@ -10,8 +10,10 @@ import {
   isNil,
   isEmpty,
   map,
+  path,
   prop,
-  reject
+  reject,
+  where
 } from "ramda";
 import Dayz from "dayz";
 import renderEventTitle from "./EventTitle";
@@ -19,8 +21,10 @@ import renderEventTitle from "./EventTitle";
 export const toDayzEventCollection = events =>
   new Dayz.EventsCollection(events);
 
+const emptyOrNil = either(isNil, isEmpty);
+
 export const combineAppointments = compose(
-  reject(either(isNil, isEmpty)),
+  reject(where({ range: emptyOrNil })),
   converge(append, [prop("pendingAppointment"), prop("scheduledAppointments")])
 );
 
@@ -31,8 +35,8 @@ export const formatAppointmentsForCalendar = compose(
 );
 
 export const shouldRenderAppointmentCreationDialog = compose(
-  complement(isEmpty),
-  prop("pendingAppointment")
+  complement(emptyOrNil),
+  path(["pendingAppointment", "range"])
 );
 
 const rangeContainsDate = curry((date, { range }) => range.contains(date));
