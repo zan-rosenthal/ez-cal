@@ -1,5 +1,7 @@
 @import '~styles/globals';
 
+$day-border: rgb(211, 211, 211);
+
 .container {
   margin: 5% auto;
   height: 80%;
@@ -12,7 +14,8 @@
     font-size: 18px;
 
     .day {
-      height: 100px;
+      height: 16vh;
+      border: 1px solid $day-border;
     }
 
     .x-labels {
@@ -25,13 +28,16 @@
     }
 
     .events {
-      height: 80%;
+      align-items: center;
+      display: flex;
+      height: 75%;
+      margin: 0 auto;
       width: 95%;
     }
   }
 
-  //
   .dayz.month .days .day .event {
     height: 80%;
+    padding: 0;
   }
 }
