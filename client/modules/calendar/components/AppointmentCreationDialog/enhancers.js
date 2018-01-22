@@ -4,7 +4,6 @@ import { withHandlers } from "recompose";
 
 import {
   setAppointmentContent,
-  setAppointmentName,
   clearPendingAppointment,
   saveAppointment
 } from "../../actions";
@@ -21,19 +20,16 @@ const handleConfirm = props => () => {
 
 const handleCancel = prop("clearPendingAppointment");
 const handleSetContent = prop("setAppointmentContent");
-const handleSetName = prop("setAppointmentName");
 
 export default compose(
   connect(mapStateToProps, {
     setAppointmentContent,
-    setAppointmentName,
     clearPendingAppointment,
     saveAppointment
   }),
   withHandlers({
     handleConfirm,
     handleCancel,
-    handleSetContent,
-    handleSetName
+    handleSetContent
   })
 );

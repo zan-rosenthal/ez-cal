@@ -14,11 +14,6 @@ export const setAppointmentContent = content => ({
   payload: { content }
 });
 
-export const setAppointmentName = name => ({
-  type: UPDATE_PENDING_APPOINTMENT,
-  payload: { name }
-});
-
 export const clearPendingAppointment = () => ({
   type: CLEAR_PENDING_APPOINTMENT,
   payload: {}

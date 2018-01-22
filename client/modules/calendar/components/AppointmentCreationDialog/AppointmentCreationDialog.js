@@ -18,13 +18,6 @@ export default function AppointmentCreationDialog({
   return (
     <Dialog actions={actions} active={active}>
       <Input
-        onChange={handleSetName}
-        type="text"
-        label="Name"
-        value={name || ""}
-      />
-      {!name && <p>Please enter a name for your appointment</p>}
-      <Input
         onChange={handleSetContent}
         type="textarea"
         label="Description"
