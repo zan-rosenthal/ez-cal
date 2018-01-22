@@ -6,10 +6,12 @@ import {
   either,
   isNil,
   isEmpty,
+  map,
   prop,
   reject
 } from "ramda";
 import Dayz from "dayz";
+import renderEventTitle from "./EventTitle";
 
 export const toDayzEventCollection = events =>
   new Dayz.EventsCollection(events);
@@ -21,6 +23,7 @@ export const combineAppointments = compose(
 
 export const formatAppointmentsForCalendar = compose(
   toDayzEventCollection,
+  map(renderEventTitle),
   combineAppointments
 );
 

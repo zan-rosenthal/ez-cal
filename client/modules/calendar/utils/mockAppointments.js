@@ -8,12 +8,5 @@ export default [
   {
     content: "Two Hours ~ 8-10",
     range: moment.range(today.clone().hour(8), today.clone().hour(10))
-  },
-  {
-    content: "A Longer Event",
-    range: moment.range(
-      today.clone().subtract(2, "days"),
-      today.clone().add(8, "days")
-    )
   }
 ];
