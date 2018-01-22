@@ -1,6 +1,6 @@
-import { head, tail } from "ramda";
+import { head, last, tail } from "ramda";
 import { saveAppointment } from "../scheduledAppointments";
-import { mockAppointments } from "../../utils/mockAppointments";
+import mockAppointments from "../../utils/mockAppointments";
 
 describe("modules/Calendar/reducers", () => {
   describe("scheduledAppointments reducer", () => {
@@ -9,11 +9,15 @@ describe("modules/Calendar/reducers", () => {
       const pendingAppointment = head(mockAppointments);
 
       test("it appends the new appointment", () => {
-        expect(
-          saveAppointment(scheduledAppointments, {
-            payload: pendingAppointment
-          })
-        ).toEqual(mockAppointments);
+        const nextAppointments = saveAppointment(scheduledAppointments, {
+          payload: {
+            appointment: pendingAppointment
+          }
+        });
+
+        expect(last(nextAppointments).content).toEqual(
+          head(mockAppointments).content
+        );
       });
     });
   });
