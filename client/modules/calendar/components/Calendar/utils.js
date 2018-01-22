@@ -1,9 +1,12 @@
 import {
+  all,
   append,
   compose,
   complement,
   converge,
+  curry,
   either,
+  equals,
   isNil,
   isEmpty,
   map,
@@ -31,3 +34,8 @@ export const shouldRenderAppointmentCreationDialog = compose(
   complement(isEmpty),
   prop("pendingAppointment")
 );
+
+const rangeContainsDate = curry((date, { range }) => range.contains(date));
+
+export const canAddAppointment = selectedDate =>
+  compose(all(equals(false)), map(rangeContainsDate(selectedDate)));

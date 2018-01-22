@@ -7,7 +7,7 @@ import AppointmentCreationDialog from "../AppointmentCreationDialog";
 export default function Calendar({
   date,
   appointments,
-  handleSelectDay,
+  handleSelectDate,
   theme,
   shouldRenderAppointmentCreationDialog
 }) {
@@ -17,7 +17,7 @@ export default function Calendar({
         display="month"
         date={date}
         events={appointments}
-        onDayClick={handleSelectDay}
+        onDayClick={handleSelectDate}
       />
       <AppointmentCreationDialog
         active={shouldRenderAppointmentCreationDialog}

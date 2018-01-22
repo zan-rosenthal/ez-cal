@@ -7,8 +7,7 @@ export default function AppointmentCreationDialog({
   handleConfirm,
   handleCancel,
   handleSetContent,
-  handleSetName,
-  pendingAppointment: { name, content }
+  pendingAppointment: { content }
 }) {
   const actions = [
     { label: "Cancel", onClick: handleCancel },

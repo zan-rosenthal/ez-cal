@@ -7,6 +7,7 @@ import { setAppointmentDate } from "../../actions";
 import Calendar from "../../selectors";
 import { today } from "../../utils/moment";
 import {
+  canAddAppointment,
   formatAppointmentsForCalendar,
   shouldRenderAppointmentCreationDialog
 } from "./utils";
@@ -23,12 +24,14 @@ const spec = applySpec({
   shouldRenderAppointmentCreationDialog
 });
 
-const handleSelectDay = props => (_, date) =>
-  props.setAppointmentDate(date.toISOString());
+const handleSelectDate = props => (_, date) =>
+  canAddAppointment(date)(props.scheduledAppointments)
+    ? props.setAppointmentDate(date.toISOString())
+    : console.log("Cant make that appointment", date);
 
 export default compose(
   connect(mapStateToProps, { setAppointmentDate }),
   withProps(spec),
-  withHandlers({ handleSelectDay }),
+  withHandlers({ handleSelectDate }),
   withTheme(theme)
 );
