@@ -3,17 +3,23 @@ import { withHandlers, withProps } from "recompose";
 import { connect } from "react-redux";
 import withTheme from "utils/HOC/withTheme";
 
-import { setAppointmentDate, setAppointmentError } from "../../actions";
+import {
+  clearPendingAppointment,
+  setAppointmentDate,
+  setAppointmentError
+} from "../../actions";
 import Calendar from "../../selectors";
 import { today } from "../../utils/moment";
 import {
   canAddAppointment,
   formatAppointmentsForCalendar,
-  shouldRenderAppointmentCreationDialog
+  shouldRenderAppointmentCreationDialog,
+  shouldRenderAppointmentErrorDialog
 } from "./utils";
 import theme from "./theme.scss";
 
 const mapStateToProps = applySpec({
+  error: Calendar.appointmentError,
   pendingAppointment: Calendar.pendingAppointment,
   scheduledAppointments: Calendar.scheduledAppointments
 });
@@ -21,6 +27,7 @@ const mapStateToProps = applySpec({
 const spec = applySpec({
   date: always(today),
   appointments: formatAppointmentsForCalendar,
+  shouldRenderAppointmentErrorDialog,
   shouldRenderAppointmentCreationDialog
 });
 
@@ -32,7 +39,11 @@ const handleSelectDate = props => (_, date) =>
       );
 
 export default compose(
-  connect(mapStateToProps, { setAppointmentDate, setAppointmentError }),
+  connect(mapStateToProps, {
+    clearPendingAppointment,
+    setAppointmentDate,
+    setAppointmentError
+  }),
   withProps(spec),
   withHandlers({ handleSelectDate }),
   withTheme(theme)

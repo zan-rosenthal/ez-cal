@@ -1,6 +1,7 @@
 import {
   all,
   append,
+  both,
   compose,
   complement,
   converge,
@@ -22,6 +23,7 @@ export const toDayzEventCollection = events =>
   new Dayz.EventsCollection(events);
 
 const emptyOrNil = either(isNil, isEmpty);
+const exists = complement(emptyOrNil);
 
 export const combineAppointments = compose(
   reject(where({ range: emptyOrNil })),
@@ -34,9 +36,14 @@ export const formatAppointmentsForCalendar = compose(
   combineAppointments
 );
 
-export const shouldRenderAppointmentCreationDialog = compose(
-  complement(emptyOrNil),
-  path(["pendingAppointment", "range"])
+export const shouldRenderAppointmentErrorDialog = compose(
+  exists,
+  path(["pendingAppointment", "error"])
+);
+
+export const shouldRenderAppointmentCreationDialog = both(
+  compose(exists, path(["pendingAppointment", "range"])),
+  complement(shouldRenderAppointmentErrorDialog)
 );
 
 const rangeContainsDate = curry((date, { range }) => range.contains(date));
