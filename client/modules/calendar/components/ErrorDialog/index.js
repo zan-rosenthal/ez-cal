@@ -1,4 +1,4 @@
-import AppointmentErrorDialog from "./AppointmentErrorDialog";
+import ErrorDialog from "./ErrorDialog";
 import enhance from "./enhancers";
 
-export default enhance(AppointmentErrorDialog);
+export default enhance(ErrorDialog);

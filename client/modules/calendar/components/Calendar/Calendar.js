@@ -3,7 +3,7 @@ import Dayz from "dayz";
 import "dayz/dist/dayz.css";
 
 import AppointmentCreationDialog from "../AppointmentCreationDialog";
-import Dialog from "modules/generic/components/Dialog";
+import ErrorDialog from "../ErrorDialog";
 
 export default function Calendar({
   date,
@@ -11,8 +11,8 @@ export default function Calendar({
   clearPendingAppointment,
   error,
   handleSelectDate,
+  handleAppointmentCreationError,
   theme,
-  setAppointmentError,
   shouldRenderAppointmentCreationDialog,
   shouldRenderAppointmentErrorDialog
 }) {
@@ -22,18 +22,16 @@ export default function Calendar({
         display="month"
         date={date}
         events={appointments}
-        onEventClick={setAppointmentError}
+        onEventClick={handleAppointmentCreationError}
         onDayClick={handleSelectDate}
       />
       <AppointmentCreationDialog
         active={shouldRenderAppointmentCreationDialog}
       />
-      <Dialog
+      <ErrorDialog
         active={shouldRenderAppointmentErrorDialog}
         onOverlayClick={clearPendingAppointment}
-      >
-        {error}
-      </Dialog>
+      />
     </div>
   );
 }

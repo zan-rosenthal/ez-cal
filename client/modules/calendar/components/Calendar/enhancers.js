@@ -31,12 +31,18 @@ const spec = applySpec({
   shouldRenderAppointmentCreationDialog
 });
 
+const handleAppointmentCreationError = props => () => {
+  props.setAppointmentError(
+    "There is already an appointment on that day, please select another"
+  );
+
+  setTimeout(props.clearPendingAppointment, 2000);
+};
+
 const handleSelectDate = props => (_, date) =>
   canAddAppointment(date)(props.scheduledAppointments)
     ? props.setAppointmentDate(date.toISOString())
-    : props.setAppointmentError(
-        "There is already an appointment on that day, please select another"
-      );
+    : props.handleAppointmentCreationError();
 
 export default compose(
   connect(mapStateToProps, {
@@ -45,6 +51,7 @@ export default compose(
     setAppointmentError
   }),
   withProps(spec),
+  withHandlers({ handleAppointmentCreationError }),
   withHandlers({ handleSelectDate }),
   withTheme(theme)
 );
