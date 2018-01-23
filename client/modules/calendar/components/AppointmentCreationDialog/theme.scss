@@ -1,0 +1,16 @@
+@import '~styles/globals';
+
+.label {
+  color: $color-primary;
+}
+
+.bar {
+  &::before,
+  &::after {
+    background-color: $color-primary;
+  }
+}
+
+.inputElement:focus:not([disabled]):not([readonly]) ~ .label:not(.fixed) {
+  color: $color-primary;
+}

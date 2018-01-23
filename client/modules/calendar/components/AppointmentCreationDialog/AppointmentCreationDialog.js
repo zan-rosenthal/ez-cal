@@ -7,7 +7,8 @@ export default function AppointmentCreationDialog({
   handleConfirm,
   handleCancel,
   handleSetContent,
-  pendingAppointment: { content }
+  pendingAppointment: { content },
+  theme
 }) {
   const actions = [
     { label: "Cancel", onClick: handleCancel },
@@ -21,6 +22,7 @@ export default function AppointmentCreationDialog({
         type="textarea"
         label="Description"
         value={content || ""}
+        theme={theme}
       />
       {!content && <p>Please enter a description for your appointment</p>}
     </Dialog>

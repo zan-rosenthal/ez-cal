@@ -1,6 +1,8 @@
 import { applySpec, compose, prop } from "ramda";
 import { connect } from "react-redux";
 import { withHandlers } from "recompose";
+import withTheme from "utils/HOC/withTheme";
+import theme from "./theme.scss";
 
 import {
   setAppointmentContent,
@@ -31,5 +33,6 @@ export default compose(
     handleConfirm,
     handleCancel,
     handleSetContent
-  })
+  }),
+  withTheme(theme)
 );
